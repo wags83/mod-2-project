@@ -1,0 +1,92 @@
+<table>
+  <tr><h3>
+    <th>Portfolio ID</th>
+    <th>Name</th>
+    <th>Initial Cash</th>
+    <th>Current Cash</th>
+    <th>User ID</th>
+    <th>Value</th>
+    <th>P&L</th>
+    <th>P&L %</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+  </tr>
+    <hr>
+    <tr>
+        <td><%= @portfolio.id %></td>
+        <td><%= @portfolio.portfolio_name %></td>
+        <td><%= @portfolio.initial_cash %></td>
+        <td><%= @portfolio.current_cash %></td>
+        <td><%= @portfolio.user_id %></td>
+        <td><%= @portfolio.portfolio_value %></td>
+        <td><%= @portfolio.portfolio_pl %></td>
+        <td><%= @portfolio.portfolio_pl_ratio %></td>
+        <td><%= @portfolio.created_at %></td>
+        <td><%= @portfolio.updated_at %></td> 
+        <%= button_to 'Buy Investment', new_portfolio_investment_path(@portfolio), method: :get %>
+
+        </tr>
+  <table>
+  <h4><tr>
+    <th>Investment ID</th>
+    <th>Symbol</th>
+    <th>Purchase Price</th>
+    <th>Current Price</th>
+    <th>Purchase Date</th>
+    <th>Number of Shares</th>
+    <th>Value</th>
+    <th>P&L</th>
+    <th>P&L %</th>
+    <th>Portfolio ID</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+  </tr>
+    
+    <% @portfolio.investments.each do |i| %>
+    <tr>
+        <td><%=link_to i.id, portfolio_investment_path(@portfolio, i.id) %></td>
+        <td><%= i.symbol %></td>
+        <td><%= i.purchase_price %></td>
+        <td><%= i.current_price %></td>
+        <td><%= i.purchase_date %></td>
+        <td><%= i.num_shares %></td>
+        <td><%= i.investment_value.round(1) %></td>
+        <td><%= i.investment_pl.round(1) %></td>
+        <td><%= i.investment_pl_ratio.round(1) %></td>
+        <td><%= i.portfolio_id %></td>
+        <td><%= i.created_at %></td>
+        <td><%= i.updated_at %></td> 
+        <td><%= button_to "Sell Investment #{i.symbol}", portfolio_sell_investment_path(@portfolio, i), method: :get %></td>
+    </tr></h4>
+    <% end %>
+    </table>
+    
+
+<h3>Comments:<br></h3>
+<% @portfolio.comments.each do |comment|%>
+Username: <%= link_to User.all.find(comment.user_id).username, User.all.find(comment.user_id) %><br>
+Title: <%= comment.title %><br>
+Content: <%= comment.content %><br>
+<%= button_to 'Delete Comment', comment, method: :delete %>
+<%= button_to 'Edit Comment', "/comments/:#{comment.id}/edit", method: :get %>
+<% end %>
+
+<h3>Add a Comment:<br></h3>
+<%= form_for @comment do |f| %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %><br>
+
+  <%= f.label :content %>
+  <%= f.text_area :content %><br>
+
+  <%= f.label :user_id %>
+  <%= f.number_field :user_id %><br>
+
+  <%= f.label :portfolio_id %>
+  <%= f.text_field :portfolio_id %><br>
+
+  <%=  f.submit %>
+  <% end %>
+
+<%= button_to 'Delete Portfolio', @portfolio, method: :delete %>

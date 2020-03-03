@@ -1,0 +1,9 @@
+<%= form_tag '/news' do %>
+<label>Search Term:</label><br>
+<%= text_field_tag :search_term, nil, placeholder: 'Please enter stock ticker symbol...' %>
+
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  
+<%= submit_tag "Search" %>
+
+<% end %>

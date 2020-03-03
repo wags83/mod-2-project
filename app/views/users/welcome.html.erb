@@ -1,0 +1,13 @@
+<h1 style="color: maroon">Welcome to Portfolio Party</h1>
+
+<h3> TOP 5 PORTFOLIOS </h3>
+<% @sorted.each do |pl|  %> 
+<li style="color: red">User: <%= User.find(pl[1]).username %> | P&L Ratio: <%= pl[0].round(2) %>%</li>
+<% end %>
+
+<h3> TOP 5 USERS</h3>
+<h5>Average P&L Ratio of ALL Portfolios for Each User</h5>
+<% @users_ports_sorted.each do |pl|  %> 
+<li style="color: red">User: <%= User.find(pl[1]).username %> | P&L Ratio: <%= pl[0].round(2) %>%</li>
+<% end %>
+

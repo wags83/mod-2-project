@@ -1,0 +1,25 @@
+
+<%= form_for @investment do |f| %>
+  <%= f.label :symbol %>
+  <%= f.text_field :symbol %>
+
+  <%= f.label :purchase_price %>
+  <%= f.number_field :purchase_price %>
+
+  <%= f.label :current_price %>
+  <%= f.number_field :current_price %>
+
+  <%= f.label :purchase_date %>
+  <%= f.text_field :purchase_date %>
+
+  <%= f.label :portfolio_id %>
+  <%= f.text_field :portfolio_id %>
+
+  <%= f.label :num_shares %>
+  <%= f.text_field :num_shares %>
+
+  <%=  f.submit %>
+
+  
+
+  <% end %>

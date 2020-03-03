@@ -1,0 +1,17 @@
+<h1>Ticker Symbol: <%= @news.search_term.upcase %></h1>
+
+<h2>Stock Price Data:</h2>
+<% @stock_data.each do |key, value| %>
+<h4><%= "#{key}: #{value}" %><br></h4>
+<% end %>
+
+<h2>Company News:</h2><hr>
+<% @top_5_hash.each do |article| %>
+<p>Title: <%= article["title"] %><p>
+<p>Content: <%= article["content"] %><p>
+<p>Source: <%= article["source"]["name"] %></p>
+<p>Author: <%= article["author"] %><p>
+<p>Link: <a href="<%= article["url"] %>"><%= article["url"] %></a><p>
+<hr>
+<% end %>
+

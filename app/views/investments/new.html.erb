@@ -1,0 +1,11 @@
+
+<%= form_for [@portfolio, @investment] do |f| %>
+  <%= f.label :symbol %>
+  <%= f.text_field :symbol %>
+
+  <%= f.label :num_shares %>
+  <%= f.number_field :num_shares %>
+
+  <%=  f.submit %>
+
+  <% end %>
