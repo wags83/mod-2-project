@@ -7,12 +7,18 @@ Rails.application.routes.draw do
 
 
   resources :users
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
   resources :portfolios do
-    resources :investments, only: [:index, :create, :new, :show]
-    get "investments/:id/sell", to: "investments#sell", as: :sell_investment
+    resources :investments, only: [:index, :create, :new, :show, :update, :edit]
+    # get "investments/:id/sell", to: "investments#sell", as: :sell_investment
 
   end 
   resources :news
   resources :comments
   get '/comments/:id/edit', to: 'comments#edit'
+
+
+
 end

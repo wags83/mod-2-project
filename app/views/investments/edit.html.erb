@@ -1,22 +1,25 @@
-<%= form_for @investment do |f| %>
-  <%= f.label :symbol %>
-  <%= f.text_field :symbol %>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <p><%= error %></p>
+  <% end %>
+<% end %>
 
-  <%= f.label :purchase_price %>
-  <%= f.number_field :purchase_price %>
+<h1>YOU ARE SELLING <%= @investment.symbol%> FOR <%= MyHelper.get_current_stock_price(@investment.symbol) %></h1>
+<h3>DETAILS OF TRANSACTION:</h3>
+<h4>SYMBOL: <%= @investment.symbol %></h4>
+<h4>PURCHASE PRICE: <%= @investment.purchase_price %></h4>
+<h4>CURRENT PRICE: <%= @investment.current_price %></h4>
+<h4>PURCHASE DATE: <%= @investment.purchase_date %></h4>
+<h4>PORTFOLIO: <%= @portfolio.portfolio_name %></h4>
 
-  <%= f.label :current_price %>
-  <%= f.number_field :current_price %>
 
-  <%= f.label :purchase_date %>
-  <%= f.text_field :purchase_date %>
-
-  <%= f.label :portfolio_id %>
-  <%= f.text_field :portfolio_id %>
+<%= form_for [@portfolio, @investment] do |f| %>
 
   <%= f.label :num_shares %>
-  <%= f.text_field :num_shares %>
+  <%= f.text_field :num_shares %><br>
 
-  <%=  f.submit %>
+
+  
+  <%=  f.submit "Sell Investment" %>
 
   <% end %>

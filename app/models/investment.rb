@@ -1,6 +1,9 @@
 class Investment < ApplicationRecord
 
     belongs_to :portfolio
+    validates :num_shares, numericality: { greater_than: 0}
+    # validates :num_shares, numericality: { less_than: @investment.num_shares}
+
 
     #API limits calls to 5 per minute
     def self.update_all_prices_to_current_slowly_better
