@@ -6,11 +6,7 @@ class User < ApplicationRecord
     validates :username, uniqueness: true
     validates :email, uniqueness: true
 
-<<<<<<< HEAD
-    # attr_reader :password 
-=======
     # attr_reader :password
->>>>>>> 73c28612c4b2e502e617836a489a6140389a6156
 
     # def password=(plain_text_pw)
     #     self.password_digest = BCrypt::Password.create(plain_text_pw)

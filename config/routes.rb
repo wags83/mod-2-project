@@ -11,9 +11,6 @@ Rails.application.routes.draw do
   post '/portfolios/create', to: 'portfolios#create'
 
   resources :users
-  get '/login', to: 'sessions#new', as: 'login'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy', as: 'logout'
   resources :portfolios do
     resources :investments, only: [:index, :create, :new, :show, :update, :edit]
     # get "investments/:id/sell", to: "investments#sell", as: :sell_investment
