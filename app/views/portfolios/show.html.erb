@@ -15,17 +15,16 @@
     <tr>
         <td><%= @portfolio.id %></td>
         <td><%= @portfolio.portfolio_name %></td>
-        <td><%= @portfolio.initial_cash %></td>
-        <td><%= @portfolio.current_cash %></td>
+        <td><%= @portfolio.initial_cash.round(0) %></td>
+        <td><%= @portfolio.current_cash.round(0) %></td>
         <td><%= @portfolio.user_id %></td>
-        <td><%= @portfolio.portfolio_value %></td>
-        <td><%= @portfolio.portfolio_pl %></td>
-        <td><%= @portfolio.portfolio_pl_ratio %></td>
+        <td><%= @portfolio.portfolio_value.round(0) %></td>
+        <td><%= @portfolio.portfolio_pl.round(0) %></td>
+        <td><%= @portfolio.portfolio_pl_ratio.round(0) %></td>
         <td><%= @portfolio.created_at %></td>
         <td><%= @portfolio.updated_at %></td> 
-        <%= button_to 'Buy Investment', new_portfolio_investment_path(@portfolio), method: :get %>
-
         </tr>
+
   <table>
   <h4><tr>
     <th>Investment ID</th>
@@ -50,9 +49,9 @@
         <td><%= i.current_price %></td>
         <td><%= i.purchase_date %></td>
         <td><%= i.num_shares %></td>
-        <td><%= i.investment_value.round(1) %></td>
-        <td><%= i.investment_pl.round(1) %></td>
-        <td><%= i.investment_pl_ratio.round(1) %></td>
+        <td><%= i.investment_value.round(0) %></td>
+        <td><%= i.investment_pl.round(0) %></td>
+        <td><%= i.investment_pl_ratio.round(0) %></td>
         <td><%= i.portfolio_id %></td>
         <td><%= i.created_at %></td>
         <td><%= i.updated_at %></td> 
@@ -60,6 +59,7 @@
     </tr></h4>
     <% end %>
     </table>
+    <%= button_to 'Buy Investment', new_portfolio_investment_path(@portfolio), method: :get %>
     
 
 <h3>Comments:<br></h3>
@@ -68,25 +68,25 @@ Username: <%= link_to User.all.find(comment.user_id).username, User.all.find(com
 Title: <%= comment.title %><br>
 Content: <%= comment.content %><br>
 <%= button_to 'Delete Comment', comment, method: :delete %>
-<%= button_to 'Edit Comment', "/comments/:#{comment.id}/edit", method: :get %>
+<%= link_to 'Edit Comment', "/comments/#{comment.id}/edit"%>
 <% end %>
 
 <h3>Add a Comment:<br></h3>
-<%= form_for @comment do |f| %>
+<%= form_tag  '/comments/create' do %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %><br>
+  <label>Title:</label>
+  <%= text_field_tag :title %><br>
 
-  <%= f.label :content %>
-  <%= f.text_area :content %><br>
+  <label>Content:</label>
+  <%= text_area_tag :content %><br>
 
-  <%= f.label :user_id %>
-  <%= f.number_field :user_id %><br>
+  <%= hidden_field_tag(:user_id, current_user.id) %><br>
 
-  <%= f.label :portfolio_id %>
-  <%= f.text_field :portfolio_id %><br>
+  <%= hidden_field_tag(:portfolio_id, @portfolio.id) %>
 
-  <%=  f.submit %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <%= submit_tag "Create" %>
   <% end %>
 
 <%= button_to 'Delete Portfolio', @portfolio, method: :delete %>

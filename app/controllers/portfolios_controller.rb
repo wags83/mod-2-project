@@ -2,7 +2,6 @@ class PortfoliosController < ApplicationController
     def index
         @portfolios = Portfolio.all
         @investments = Investment.all
-        render :index
     end
 
     def show
@@ -15,9 +14,14 @@ class PortfoliosController < ApplicationController
     end
 
     def create
-        @portfolio = Portfolio.create(portfolio_params)
-
+        @portfolio = Portfolio.new(portfolio_name: params[:portfolio_name], user_id: params[:user_id], initial_cash: params[:initial_cash], current_cash: params[:initial_cash])
+        if @portfolio.save
+        flash[:success] = "Portfolio successfully created"
         redirect_to @portfolio
+        else
+        flash[:error] = "Something went wrong"
+        redirect_to new_portfolio_path
+        end
     end
 
     def edit
@@ -35,15 +39,11 @@ class PortfoliosController < ApplicationController
         @portfolio = Portfolio.find(params[:id])
         @portfolio.destroy
     
-        redirect_to portfolios_path
+        redirect_to user_path(current_user.id)
     end
 
 
 
-    private
 
-    def portfolio_params
-        params.require(:portfolio).permit(:initial_cash, :current_cash, :porfolio_name, :user_id)
-      end
 
 end

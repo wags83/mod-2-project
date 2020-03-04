@@ -13,7 +13,7 @@ class InvestmentsController < ApplicationController
         @investment = Investment.new
         @portfolio = Portfolio.find(params[:portfolio_id])
     end
-
+        ####Should refactor to reduce API calls, can discuss tomorrow.
     def create
         # byebug
         current_price = MyHelper.get_current_stock_price(investment_params[:symbol])
