@@ -8,13 +8,13 @@ def new
 end
 
 def create
-    @comment = Comment.new(comment_params)
+    @comment = Comment.new(title: params[:title], content: params[:content], user_id: params[:user_id], portfolio_id: params[:portfolio_id])
     if @comment.save
       flash[:success] = "Comment successfully created"
       redirect_to portfolio_path(@comment.portfolio_id)
     else
       flash[:error] = "Something went wrong"
-      render portfolio_path(@comment.portfolio_id)
+      redirect_to portfolio_path(@comment.portfolio_id)
     end
 end
 
@@ -24,11 +24,11 @@ end
 
 def update
     @comment = Comment.find(params[:id])
-    if @comment.update(params[:comment])
+    if @comment.update(comment_params)
       flash[:success] = "Comment was successfully updated"
-      redirect_to @comment
+      redirect_to portfolio_path(@comment.portfolio_id)
     else
-      flash[:error] = "Something went wrong"
+      flash[:error] = "There was a problem editing this comment, please try again."
       redirect_to edit_comment_path(@comment)
     end
 end
@@ -47,10 +47,6 @@ def destroy
 end
 
 
-private
 
-def comment_params
-    params.require(:comment).permit(:title, :content, :user_id, :portfolio_id)
-end
 
 end

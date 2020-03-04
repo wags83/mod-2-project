@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   root to: 'users#welcome'
   
-
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
+  post '/comments/create', to: 'comments#create'
+  post '/portfolios/create', to: 'portfolios#create'
 
   resources :users
   resources :portfolios do

@@ -1,25 +1,16 @@
 
-<%= form_for @investment do |f| %>
-  <%= f.label :symbol %>
-  <%= f.text_field :symbol %>
+  <%= form_tag '/portfolios/create' do %>
+  <label>Portfolio Name:</label>
+  <%= text_field_tag :portfolio_name %>
 
-  <%= f.label :purchase_price %>
-  <%= f.number_field :purchase_price %>
+  <label>Initial Cash:</label>
+  <%= number_field_tag :initial_cash %>
 
-  <%= f.label :current_price %>
-  <%= f.number_field :current_price %>
+  <%= hidden_field_tag(:user_id, current_user.id) %>
 
-  <%= f.label :purchase_date %>
-  <%= f.text_field :purchase_date %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-  <%= f.label :portfolio_id %>
-  <%= f.text_field :portfolio_id %>
-
-  <%= f.label :num_shares %>
-  <%= f.text_field :num_shares %>
-
-  <%=  f.submit %>
+  <%= submit_tag "Create" %>
+  <% end %>
 
   
-
-  <% end %>

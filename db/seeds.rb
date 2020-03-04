@@ -4,11 +4,11 @@ Portfolio.all.each { |p| p.destroy}
 Investment.all.each { |i| i.destroy} 
 Comment.all.each { |i| i.destroy} 
 
-user1 = User.create(first_name: "Joe", last_name: "Block", username: "JoeB", password: "123", email: "JoeeyB@italyrulez.com")
-user2 = User.create(first_name: "John", last_name: "Block", username: "JohnB", password: "456", email: "JohnB@yahoo.com")
-user3 = User.create(first_name: "Rick", last_name: "Sanchez", username: "RSanchez", password: "789", email: "Rick.Sanchez@rickandmorty.com")
-user4 = User.create(first_name: "Morty", last_name: "Smith", username: "Morty", password: "111", email: "Morty@gmail.com")
-user5 = User.create(first_name: "Summer", last_name: "Smith", username: "S.Smith", password: "222", email: "Summer@gmail.com.com")
+user1 = User.create(first_name: "Joe", last_name: "Block", username: "JoeB", email: "JoeeyB@italyrulez.com")
+user2 = User.create(first_name: "John", last_name: "Block", username: "JohnB", email: "JohnB@yahoo.com")
+user3 = User.create(first_name: "Rick", last_name: "Sanchez", username: "RSanchez", email: "Rick.Sanchez@rickandmorty.com")
+user4 = User.create(first_name: "Morty", last_name: "Smith", username: "Morty", email: "Morty@gmail.com")
+user5 = User.create(first_name: "Summer", last_name: "Smith", username: "S.Smith", email: "Summer@gmail.com.com")
 
 portfolio1 = Portfolio.create(portfolio_name: "Aggressive", initial_cash: 10000, current_cash: 10000, user_id: User.all.sample.id)
 portfolio2 = Portfolio.create(portfolio_name: "Conservative", initial_cash: 100000, current_cash: 100000, user_id: User.all.sample.id)

@@ -21,12 +21,12 @@ Portfolios: </h1><hr>
     <tr>
         <td><%= link_to p.id, p %></td>
         <td><%= "#{p.portfolio_name}" %></td>
-        <td><%= "#{p.initial_cash}" %></td>
-        <td><%= "#{p.current_cash}" %></td>
+        <td><%= "#{p.initial_cash.round(0)}" %></td>
+        <td><%= "#{p.current_cash.round(0)}" %></td>
         <td><%= "#{p.user_id}" %></td>
-        <td><%= "#{p.portfolio_value.round(1)}" %></td>
-        <td><%= "#{p.portfolio_pl.round(1)}" %></td>
-        <td><%= "#{p.portfolio_pl_ratio.round(1)}" %></td>
+        <td><%= "#{p.portfolio_value.round(0)}" %></td>
+        <td><%= "#{p.portfolio_pl.round(0)}" %></td>
+        <td><%= "#{p.portfolio_pl_ratio.round(0)}" %></td>
         <td><%= "#{p.created_at}" %></td>
         <td><%= "#{p.updated_at}" %></td> 
         </tr>
@@ -48,15 +48,15 @@ Portfolios: </h1><hr>
     
     <% p.investments.each do |i| %>
     <tr>
-        <td><%= link_to i.id, i %></td>
+        <td><%= i.id %></td>
         <td><%= "#{i.symbol}" %></td>
         <td><%= "#{i.purchase_price}" %></td>
         <td><%= "#{i.current_price}" %></td>
         <td><%= "#{i.purchase_date}" %></td>
         <td><%= "#{i.num_shares}" %></td>
-        <td><%= "#{i.investment_value.round(1)}" %></td>
-        <td><%= "#{i.investment_pl.round(1)}" %></td>
-        <td><%= "#{i.investment_pl_ratio.round(1)}" %></td>
+        <td><%= "#{i.investment_value.round(0)}" %></td>
+        <td><%= "#{i.investment_pl.round(0)}" %></td>
+        <td><%= "#{i.investment_pl_ratio.round(0)}" %></td>
         <td><%= "#{i.portfolio_id}" %></td>
         <td><%= "#{i.created_at}" %></td>
         <td><%= "#{i.updated_at}" %></td> 
@@ -68,6 +68,8 @@ Portfolios: </h1><hr>
 
 </h3></table>
 
+<%= button_to "Create New Portfolio", new_portfolio_path, method: :get %>
+
 <h1>Comments:</h1>
 
 <% @user.comments.each do |c| %>
@@ -75,4 +77,6 @@ ID: <%= c.id %><br>
 Title: <%= c.title %><br>
 Content: <%= c.content %><br>
 Portfolio ID: <%= link_to c.portfolio_id, Portfolio.all.find(c.portfolio_id) %><br>
+<%= button_to 'Delete Comment', c, method: :delete %>
+<%= link_to 'Edit Comment', "/comments/#{c.id}/edit"%><br><br>
 <% end %>

@@ -20,8 +20,8 @@
     <tr>
         <td><%= link_to p.id, p %></td>
         <td><%= "#{p.portfolio_name}" %></td>
-        <td><%= "#{p.initial_cash}" %></td>
-        <td><%= "#{p.current_cash}" %></td>
+        <td><%= "#{p.initial_cash.round(0)}" %></td>
+        <td><%= "#{p.current_cash.round(0)}" %></td>
         <td><%= "#{p.user_id}" %></td>
         <td><%= "#{p.portfolio_value.round(0)}" %></td>
         <td><%= "#{p.portfolio_pl.round(0)}" %></td>
