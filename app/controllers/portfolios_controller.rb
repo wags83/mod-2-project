@@ -2,11 +2,13 @@ class PortfoliosController < ApplicationController
     def index
         @portfolios = Portfolio.all
         @investments = Investment.all
+        @users = User.all
     end
 
     def show
         @portfolio = Portfolio.find(params[:id])
         @comment = Comment.new
+        @users = User.all
     end
 
     def new
