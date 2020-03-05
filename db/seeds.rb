@@ -15,7 +15,7 @@ end
 
 20.times do |i|
     cash = rand(10000..100000)
-    Portfolio.create(portfolio_name: Faker::Ancient.god, initial_cash: cash, current_cash: cash, user_id: User.all.sample.id)
+    Portfolio.create(portfolio_name: Faker::Games::Pokemon.name, initial_cash: cash, current_cash: cash, user_id: User.all.sample.id)
 end
 
 

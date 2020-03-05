@@ -40,7 +40,7 @@
         <td><%= number_to_currency(i.investment_value.round(0)) %></td>
         <td><%= number_to_currency(i.investment_pl.round(0)) %></td>
         <td><%= "#{i.investment_pl_ratio.round(0)} %" %></td>
-        <td><%= button_to "Sell Investment", edit_portfolio_investment_path(@portfolio, i), method: :get if current_user %></td>
+        <td><%= button_to "Sell Investment", edit_portfolio_investment_path(@portfolio, i), method: :get if current_user && current_user.id == @portfolio.user_id %></td>
     </tr>
     <% end %>
     </table>
