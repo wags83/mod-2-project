@@ -1,6 +1,0 @@
-<h1>Investment ID: <%= @investment.id %></h1>
-
-<% @investment.attributes.each do |key, value| %>
-<%= "#{key}: #{value}" %><br>
-<% end %>
-<%= button_to 'Destroy', [@investment, portfolio_investment_path(@portfolio, @investment.id)], method: :delete, data: {confrim: "Really?"}  %>

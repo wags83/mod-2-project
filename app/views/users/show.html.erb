@@ -68,7 +68,7 @@ Portfolios: </h1><hr>
 
 </h3></table>
 
-<%= button_to "Create New Portfolio", new_portfolio_path, method: :get %>
+<%= button_to "Create New Portfolio", new_portfolio_path, method: :get if current_user == @user %>
 
 <h1>Comments:</h1>
 
@@ -77,6 +77,6 @@ ID: <%= c.id %><br>
 Title: <%= c.title %><br>
 Content: <%= c.content %><br>
 Portfolio ID: <%= link_to c.portfolio_id, Portfolio.all.find(c.portfolio_id) %><br>
-<%= button_to 'Delete Comment', c, method: :delete %>
-<%= link_to 'Edit Comment', "/comments/#{c.id}/edit"%><br><br>
+<%= button_to 'Delete Comment', c, method: :delete if current_user.id == c.user_id%>
+<%= link_to 'Edit Comment', "/comments/#{c.id}/edit" if current_user.id == c.user_id%><br><br>
 <% end %>

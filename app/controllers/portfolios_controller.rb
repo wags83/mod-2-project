@@ -24,16 +24,6 @@ class PortfoliosController < ApplicationController
         end
     end
 
-    def edit
-        @portfolio = Portfolio.find(params[:id])
-    end
-
-    def update
-        @portfolio = Portfolio.find(params[:id])
-        @portfolio.update(portfolio_params)
-
-        redirect_to portfolio_path(@portfolio.id)
-    end
 
     def destroy
         @portfolio = Portfolio.find(params[:id])
@@ -41,8 +31,6 @@ class PortfoliosController < ApplicationController
     
         redirect_to user_path(current_user.id)
     end
-
-
 
 
 

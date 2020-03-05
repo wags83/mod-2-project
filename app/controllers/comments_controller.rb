@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-def show
-    @commment = Comment.find(params[:id])
-end
+# def show
+#     @commment = Comment.find(params[:id])
+# end
 
 def new
     @comment = Comment.new
@@ -46,7 +46,10 @@ def destroy
     end
 end
 
-
+private
+def comment_params 
+  params.require(:comment).permit(:user_id, :title, :content, :portfolio_id)
+end
 
 
 end
