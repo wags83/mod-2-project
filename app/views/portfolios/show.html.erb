@@ -1,3 +1,4 @@
+<%= flash[:error] if flash[:error] %>
 <h2>Owner: <%= link_to @users.find_by(id: @portfolio.user_id).username, user_path(@portfolio.user_id) %></h2>
 <table class="table table-dark">
   <tr>

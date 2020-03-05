@@ -46,7 +46,7 @@
     <% end %>
 </table>
 
-<%= button_to "Create New Portfolio", new_portfolio_path, method: :get %>
+<%= button_to "Create New Portfolio", new_portfolio_path, method: :get if current_user && current_user.id == @user.id %>
 <br>
 <h2>Comments:</h2>
 

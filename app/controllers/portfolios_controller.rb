@@ -13,8 +13,8 @@ class PortfoliosController < ApplicationController
 
     def new
         @portfolio = Portfolio.new
-        if current_user && current_user.id == @portfolio.user_id
-
+        if current_user
+            render :new
         else
             redirect_to @portfolio 
         end

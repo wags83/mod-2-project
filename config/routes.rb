@@ -10,14 +10,14 @@ Rails.application.routes.draw do
   post '/comments/create', to: 'comments#create'
   post '/portfolios/create', to: 'portfolios#create'
 
-  resources :users, only: [:new, :show, :index]
-  resources :portfolios, only: [:index, :new, :show] do
+  resources :users, only: [:new, :show, :index, :create]
+  resources :portfolios, only: [:index, :new, :show, :destroy] do
     resources :investments, only: [:create, :new, :update, :edit]
     # get "investments/:id/sell", to: "investments#sell", as: :sell_investment
 
   end 
-  resources :news
-  resources :comments
+  resources :news, only: [:new, :show, :create]
+  resources :comments, only: [:create, :edit, :update]
   get '/comments/:id/edit', to: 'comments#edit'
 
 

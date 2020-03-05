@@ -4,6 +4,9 @@ class Portfolio < ApplicationRecord
     belongs_to :user
     has_many :comments, dependent: :destroy
 
+    validates :portfolio_name, presence: true
+    validates :initial_cash, numericality: {greater_than: 0}
+
     def validate_buy (symbol, num_shares)
         current_price = MyHelper.get_current_stock_price(symbol)
         if !current_price
