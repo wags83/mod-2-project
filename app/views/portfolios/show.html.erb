@@ -86,8 +86,13 @@
 
   <%= submit_tag "Add Comment" %>
   <% end %>
+<<<<<<< HEAD
   </p>
 </div>
 <% else %>
   You must be logged in to leave a comment.
 <% end %>
+=======
+
+<%= button_to 'Delete Portfolio', @portfolio, method: :delete if current_user.id == @portfolio.user_id %>
+>>>>>>> d13a8b701e7b860c1bb25106826c2bebd1fa7191

@@ -10,3 +10,4 @@
 <% @users_ports_sorted.each do |pl|  %> 
 <li style="color: red">User: <%= User.find(pl[1]).username %> | P&L Ratio: <%= pl[0].round(2) %>%</li>
 <% end %>
+

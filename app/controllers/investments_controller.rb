@@ -1,41 +1,33 @@
 class InvestmentsController < ApplicationController
-    def index
-        @investments = Investment.all
-
-    end
-
-    def show
-        @investment = Investment.find(params[:id])
-        @portfolio = Portfolio.find(params[:portfolio_id])
-    end
-
+   
     def new
-        
-        @investment = Investment.new
         @portfolio = Portfolio.find(params[:portfolio_id])
+        @investment = Investment.new
+
+        if current_user.id == @portfolio.user_id
+        else
+            redirect_to @portfolio
+        end
     end
         ####Should refactor to reduce API calls, can discuss tomorrow.
     def create
-        # byebug
         current_price = MyHelper.get_current_stock_price(investment_params[:symbol])
         @portfolio = Portfolio.find(params[:portfolio_id])
         @portfolio.validate_buy(investment_params[:symbol], investment_params[:num_shares])
         @investment = Investment.new(investment_params)
         @investment.update(purchase_price: current_price,current_price: current_price, purchase_date: MyHelper.current_date_to_YYYYMMDD, portfolio_id: params[:portfolio_id])
-        # new_balance = @portfolio.current_cash - (investment_params[:num_shares].to_f*MyHelper.get_current_stock_price(investment_params[:symbol]))
         @portfolio.update(current_cash: @portfolio.current_cash - (investment_params[:num_shares].to_f*current_price))
         redirect_to @portfolio
     end
 
-    # def edit
-    #     @investment = Investment.find(params[:id])
-    #     @portfolio = Portfolio.find(params[:portfolio_id])
-    # end
-
     def edit
-    
         @investment = Investment.find(params[:id])
         @portfolio = Portfolio.find(params[:portfolio_id])
+        if current_user.id == @investment.user.id 
+
+        else
+            redirect_to @portfolio
+        end
     end
 
     def update
