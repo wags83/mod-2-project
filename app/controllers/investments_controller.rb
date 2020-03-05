@@ -13,11 +13,15 @@ class InvestmentsController < ApplicationController
     def create
         current_price = MyHelper.get_current_stock_price(investment_params[:symbol])
         @portfolio = Portfolio.find(params[:portfolio_id])
-        @portfolio.validate_buy(investment_params[:symbol], investment_params[:num_shares])
-        @investment = Investment.new(investment_params)
-        @investment.update(purchase_price: current_price,current_price: current_price, purchase_date: MyHelper.current_date_to_YYYYMMDD, portfolio_id: params[:portfolio_id])
-        @portfolio.update(current_cash: @portfolio.current_cash - (investment_params[:num_shares].to_f*current_price))
-        redirect_to @portfolio
+        if current_price
+            @portfolio.validate_buy(investment_params[:symbol], investment_params[:num_shares])
+            @investment = Investment.new(investment_params)
+            @investment.update(purchase_price: current_price,current_price: current_price, purchase_date: MyHelper.current_date_to_YYYYMMDD, portfolio_id: params[:portfolio_id])
+            @portfolio.update(current_cash: @portfolio.current_cash - (investment_params[:num_shares].to_f*current_price))
+            redirect_to @portfolio
+        else
+            flash[:notice] = "You did not enter in a valid stock ticker symbol."
+        end
     end
 
     def edit
