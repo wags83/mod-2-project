@@ -1,11 +1,12 @@
-
+<h1 id='w1'>GIT RICH $$$$ NEVER DIE TRYING </h1>
+<div class='container'>
 <%= form_for [@portfolio, @investment] do |f| %>
-  <%= f.label :symbol %>
-  <%= f.text_field :symbol %>
+  <%= f.label :symbol, "Stock Ticker Symbol" %>
+  <%= f.text_field :symbol %><br>
 
-  <%= f.label :num_shares %>
-  <%= f.number_field :num_shares %>
+  <%= f.label :num_shares, "Number of Shares" %>
+  <%= f.number_field :num_shares %><br>
 
-  <%=  f.submit %>
-
+  <%=  f.submit "Buy Stock"%>
   <% end %>
+</div>

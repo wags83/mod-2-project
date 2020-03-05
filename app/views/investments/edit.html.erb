@@ -4,15 +4,15 @@
   <% end %>
 <% end %>
 
-<h1>YOU ARE SELLING <%= @investment.symbol%> FOR <%= MyHelper.get_current_stock_price(@investment.symbol) %></h1>
-<h3>DETAILS OF TRANSACTION:</h3>
-<h4>SYMBOL: <%= @investment.symbol %></h4>
-<h4>PURCHASE PRICE: <%= @investment.purchase_price %></h4>
-<h4>CURRENT PRICE: <%= @investment.current_price %></h4>
-<h4>PURCHASE DATE: <%= @investment.purchase_date %></h4>
-<h4>PORTFOLIO: <%= @portfolio.portfolio_name %></h4>
+<h1 id='w1'>YOU ARE SELLING <%= @investment.symbol%> FOR <%= MyHelper.get_current_stock_price(@investment.symbol) %></h1>
+<h3 id='w2'>DETAILS OF TRANSACTION:</h3>
+<h4 id='w2'>SYMBOL: <%= @investment.symbol %><br>
+PURCHASE PRICE: <%= @investment.purchase_price %><br>
+CURRENT PRICE: <%= @investment.current_price %><br>
+PURCHASE DATE: <%= @investment.purchase_date %><br>
+PORTFOLIO: <%= @portfolio.portfolio_name %><br></h4>
 
-
+<div class='container'>
 <%= form_for [@portfolio, @investment] do |f| %>
 
   <%= f.label :num_shares %>
@@ -22,4 +22,4 @@
   
   <%=  f.submit "Sell Investment" %>
 
-  <% end %>
+  <% end %></div>
