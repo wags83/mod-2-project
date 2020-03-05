@@ -55,7 +55,7 @@
         <td><%= i.portfolio_id %></td>
         <td><%= i.created_at %></td>
         <td><%= i.updated_at %></td> 
-        <td><%= button_to "Sell Investment #{i.symbol}", edit_portfolio_investment_path(@portfolio, i), method: :get %></td>
+        <td><%= button_to "Sell Investment #{i.symbol}", edit_portfolio_investment_path(@portfolio, i), method: :get if current_user %></td>
     </tr></h4>
     <% end %>
     </table>
