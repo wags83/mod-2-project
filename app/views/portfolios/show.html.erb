@@ -1,33 +1,24 @@
-<table>
-  <tr><h3>
-    <th>Portfolio ID</th>
+<h2>Owner: <%= link_to @users.find_by(id: @portfolio.user_id).username, user_path(@portfolio.user_id) %></h2>
+<table class="table table-dark">
+  <tr>
     <th>Name</th>
     <th>Initial Cash</th>
     <th>Current Cash</th>
-    <th>User ID</th>
     <th>Value</th>
     <th>P&L</th>
     <th>P&L %</th>
-    <th>Created at</th>
-    <th>Updated at</th>
   </tr>
-    <hr>
     <tr>
-        <td><%= @portfolio.id %></td>
         <td><%= @portfolio.portfolio_name %></td>
-        <td><%= @portfolio.initial_cash.round(0) %></td>
-        <td><%= @portfolio.current_cash.round(0) %></td>
-        <td><%= @portfolio.user_id %></td>
-        <td><%= @portfolio.portfolio_value.round(0) %></td>
-        <td><%= @portfolio.portfolio_pl.round(0) %></td>
-        <td><%= @portfolio.portfolio_pl_ratio.round(0) %></td>
-        <td><%= @portfolio.created_at %></td>
-        <td><%= @portfolio.updated_at %></td> 
+        <td><%= number_to_currency(@portfolio.initial_cash.round(2)) %></td>
+        <td><%= number_to_currency(@portfolio.current_cash.round(2)) %></td>
+        <td><%= number_to_currency(@portfolio.portfolio_value.round(2)) %></td>
+        <td><%= number_to_currency(@portfolio.portfolio_pl.round(2)) %></td>
+        <td><%= "#{@portfolio.portfolio_pl_ratio.round(2)} %" %></td>
         </tr>
 
-  <table>
-  <h4><tr>
-    <th>Investment ID</th>
+  <table class="table table-dark table-sm">
+  <tr>
     <th>Symbol</th>
     <th>Purchase Price</th>
     <th>Current Price</th>
@@ -36,48 +27,55 @@
     <th>Value</th>
     <th>P&L</th>
     <th>P&L %</th>
-    <th>Portfolio ID</th>
-    <th>Created at</th>
-    <th>Updated at</th>
   </tr>
     
     <% @portfolio.investments.each do |i| %>
     <tr>
-        <td><%= i.id %></td>
         <td><%= i.symbol %></td>
-        <td><%= i.purchase_price %></td>
-        <td><%= i.current_price %></td>
+        <td><%= number_to_currency(i.purchase_price) %></td>
+        <td><%= number_to_currency(i.current_price) %></td>
         <td><%= i.purchase_date %></td>
         <td><%= i.num_shares %></td>
-        <td><%= i.investment_value.round(0) %></td>
-        <td><%= i.investment_pl.round(0) %></td>
-        <td><%= i.investment_pl_ratio.round(0) %></td>
-        <td><%= i.portfolio_id %></td>
-        <td><%= i.created_at %></td>
-        <td><%= i.updated_at %></td> 
-        <td><%= button_to "Sell Investment #{i.symbol}", edit_portfolio_investment_path(@portfolio, i), method: :get if current_user %></td>
-    </tr></h4>
+        <td><%= number_to_currency(i.investment_value.round(0)) %></td>
+        <td><%= number_to_currency(i.investment_pl.round(0)) %></td>
+        <td><%= "#{i.investment_pl_ratio.round(0)} %" %></td>
+        <td><%= button_to "Sell Investment", edit_portfolio_investment_path(@portfolio, i), method: :get if current_user %></td>
+    </tr>
     <% end %>
     </table>
-    <%= button_to 'Buy Investment', new_portfolio_investment_path(@portfolio), method: :get %>
-    
+    <table><tr>
+    <td><%= button_to 'Buy New Stock', new_portfolio_investment_path(@portfolio), method: :get %></td>
+    <td><%= button_to 'Delete Portfolio', @portfolio, method: :delete %></td>
+    </tr></table>
+    <br>
 
-<h3>Comments:<br></h3>
-<% @portfolio.comments.each do |comment|%>
-Username: <%= link_to User.all.find(comment.user_id).username, User.all.find(comment.user_id) %><br>
-Title: <%= comment.title %><br>
-Content: <%= comment.content %><br>
-<%= button_to 'Delete Comment', comment, method: :delete %>
-<%= link_to 'Edit Comment', "/comments/#{comment.id}/edit"%>
-<% end %>
-
-<h3>Add a Comment:<br></h3>
+<h2>Comments:<br></h2>
+    <% @portfolio.comments.each do |comment|%>
+    <div class="comment">
+        <p class="comment_title">
+        User: <%= link_to User.all.find(comment.user_id).username, User.all.find(comment.user_id) %><br>
+        <%= comment.title %><br>
+        </p>
+        <p class="comment_paragraph"><%= comment.content %><br>
+        </p>
+        <% if current_user && current_user.id == comment.user_id %>
+            <table><tr>
+                <td><%= button_to 'Edit Comment', "/comments/#{comment.id}/edit", method: :get%></td>
+                <td><%= button_to 'Delete Comment', comment, method: :delete %></td>
+            </tr></table>
+        <% end %>
+  </div>
+      <% end %>
+<br>
+<h2>Add a Comment:<br></h2>
+<% if current_user %>
+<div class="comment">
 <%= form_tag  '/comments/create' do %>
 
-  <label>Title:</label>
+  <p class="comment_title"><label>Title:</label><br>
   <%= text_field_tag :title %><br>
 
-  <label>Content:</label>
+  <label>Content:</label><br>
   <%= text_area_tag :content %><br>
 
   <%= hidden_field_tag(:user_id, current_user.id) %><br>
@@ -86,7 +84,10 @@ Content: <%= comment.content %><br>
 
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-  <%= submit_tag "Create" %>
+  <%= submit_tag "Add Comment" %>
   <% end %>
-
-<%= button_to 'Delete Portfolio', @portfolio, method: :delete %>
+  </p>
+</div>
+<% else %>
+  You must be logged in to leave a comment.
+<% end %>

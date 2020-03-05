@@ -13,3 +13,46 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+     background-color: lightgray;
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+ }
+
+ body a:hover{
+    text-decoration: none;
+ }
+
+ .comment {
+     margin: 1%;
+     border-left:#2196F3;
+     border-left-width: 10px;
+     border-left-style: solid;
+     background-color: rgb(221, 255, 255);
+     width: 60%;
+ }
+
+ .news {
+    margin: 1%;
+    border-left:#2196F3;
+    border-left-width: 10px;
+    border-left-style: solid;
+    background-color: rgb(221, 255, 255);
+}
+
+ .comment_paragraph {
+     margin: 4px;
+ }
+
+ .comment_title {
+    margin: 4px;
+    font-weight: bold;
+ }
+
+ textarea {
+     width: 80%;
+ }
+
+ h2 {
+    margin: 1%
+ }

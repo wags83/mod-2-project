@@ -1,17 +1,26 @@
-<h1>Ticker Symbol: <%= @news.search_term.upcase %></h1>
+<h2>Ticker Symbol: <%= @news.search_term.upcase %></h2><br>
 
 <h2>Stock Price Data:</h2>
+<% if !!@stock_data %>
+<table class="table table-light" style="margin: 1%">
 <% @stock_data.each do |key, value| %>
-<h4><%= "#{key}: #{value}" %><br></h4>
+<td><%= "#{key}: #{value}" %></td>
+<% end %>
+</table>
+
+<% else %>
+<p>Sorry, that is not a valid stock ticker symbol, please try again.</p>
 <% end %>
 
-<h2>Company News:</h2><hr>
+<h2>Company News:</h2>
 <% @top_5_hash.each do |article| %>
-<p>Title: <%= article["title"] %><p>
-<p>Content: <%= article["content"] %><p>
-<p>Source: <%= article["source"]["name"] %></p>
-<p>Author: <%= article["author"] %><p>
-<p>Link: <a href="<%= article["url"] %>"><%= article["url"] %></a><p>
-<hr>
+<div class="news">
+<p class="comment_title"><%= article["title"] %></p>
+<p class="comment_paragraph">Content: <%= article["content"] %><br>
+Source: <%= article["source"]["name"] %><br>
+Author: <%= article["author"] %><br>
+Link: <a href="<%= article["url"] %>"><%= article["url"] %></a></Link:>
+</div>
+
 <% end %>
 
