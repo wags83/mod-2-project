@@ -46,7 +46,8 @@ def destroy
     end
 end
 
-
+private
+params.require(:comment).permit(:user_id, :title, :content, :portfolio_id)
 
 
 end

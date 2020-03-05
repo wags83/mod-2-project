@@ -1,6 +1,7 @@
 class Investment < ApplicationRecord
 
     belongs_to :portfolio
+    has_one :user, :through => :portfolio
     validates :num_shares, numericality: { greater_than: 0}
     # validates :num_shares, numericality: { less_than: @investment.num_shares}
 

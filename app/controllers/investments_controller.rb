@@ -10,6 +10,7 @@ class InvestmentsController < ApplicationController
     end
 
     def new
+        
         @investment = Investment.new
         @portfolio = Portfolio.find(params[:portfolio_id])
     end

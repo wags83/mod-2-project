@@ -43,7 +43,7 @@
     
     <% @portfolio.investments.each do |i| %>
     <tr>
-        <td><%=link_to i.id, portfolio_investment_path(@portfolio, i.id) %></td>
+        <td><%= i.id %></td>
         <td><%= i.symbol %></td>
         <td><%= i.purchase_price %></td>
         <td><%= i.current_price %></td>

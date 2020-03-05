@@ -4,12 +4,50 @@
     <title>RailsMod1</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Portfolio Party</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to "Home", :welcome, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Users", users_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Portfolios", portfolios_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "Research", new_news_path, class: "nav-link" %>
+      </li>
+      <div id="login">
+      <% if session[:user_id] == nil %>
+      <li class="nav-item">
+      <%= link_to "Login", login_path, class: "nav-link" %>
+      </li>
+      <% else %>
+      <li class="nav-item">
+      <%= link_to "Logged in as: #{User.find_by(id: session[:user_id]).username}" , User.find_by(id: session[:user_id]), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "Log Out", '/logout', method: :delete, class: "nav-link" %>
+      </li></div>
+      <% end %>
+
+    </ul>
+  </div>
+</nav>
     <%= yield %>
   </body>
 </html>

@@ -1,8 +1,6 @@
 <h1>Portfolios Index Page </h1>
-<h2>Portfolios are cool bro.  Here are some sweet Portfolios:<h2>
-<h3>
-<table>
-  <tr><h3>
+<table class="table table-dark">
+  <tr>
     <th>Portfolio ID</th>
     <th>Name</th>
     <th>Initial Cash</th>
@@ -16,7 +14,6 @@
   </tr>
     
     <% @portfolios.each do |p| %>
-    <hr>
     <tr>
         <td><%= link_to p.id, p %></td>
         <td><%= "#{p.portfolio_name}" %></td>
@@ -29,8 +26,9 @@
         <td><%= "#{p.created_at}" %></td>
         <td><%= "#{p.updated_at}" %></td> 
         </tr>
-  <table>
-  <h4><tr>
+</table>
+  <table class="table table-dark">
+  <tr>
     <th>Investment ID</th>
     <th>Symbol</th>
     <th>Purchase Price</th>
@@ -47,7 +45,7 @@
     
     <% p.investments.each do |i| %>
     <tr>
-        <td><%= link_to i.id, portfolio_investment_path(p.id, i.id) %></td>
+        <td><%= i.id %></td>
         <td><%= "#{i.symbol}" %></td>
         <td><%= "#{i.purchase_price}" %></td>
         <td><%= "#{i.current_price}" %></td>
@@ -59,12 +57,10 @@
         <td><%= "#{i.portfolio_id}" %></td>
         <td><%= "#{i.created_at}" %></td>
         <td><%= "#{i.updated_at}" %></td> 
-    </tr></h4>
-    <% end %>
-    </table>
-    
+    </tr>
+    <% end %>   
     <% end %>
 
-</h3></table>
+</table>
 
 
