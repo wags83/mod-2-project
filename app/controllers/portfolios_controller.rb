@@ -13,6 +13,12 @@ class PortfoliosController < ApplicationController
 
     def new
         @portfolio = Portfolio.new
+        if current_user
+            render :new
+        else
+            redirect_to @portfolio 
+        end
+
     end
 
     def create

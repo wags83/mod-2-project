@@ -1,3 +1,4 @@
+<%= flash[:error] if flash[:error] %>
 <h2>Owner: <%= link_to @users.find_by(id: @portfolio.user_id).username, user_path(@portfolio.user_id) %></h2>
 <table class="table table-dark">
   <tr>
@@ -44,8 +45,8 @@
     <% end %>
     </table>
     <table><tr>
-    <td><%= button_to 'Buy New Stock', new_portfolio_investment_path(@portfolio), method: :get %></td>
-    <td><%= button_to 'Delete Portfolio', @portfolio, method: :delete %></td>
+    <td><%= button_to 'Buy New Stock', new_portfolio_investment_path(@portfolio), method: :get if current_user && current_user.id == @portfolio.user_id %></td>
+    <td><%= button_to 'Delete Portfolio', @portfolio, method: :delete if current_user && current_user.id == @portfolio.user_id %></td>
     </tr></table>
     <br>
 

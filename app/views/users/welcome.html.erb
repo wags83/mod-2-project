@@ -2,7 +2,7 @@
 <h3 id='w2'> TOP 5 PORTFOLIOS </h3>
 <div id='welcome'>
 <% @sorted.each do |pl|  %> 
-<li>User: <%= User.find(pl[1]).username %> | P&L Ratio: <%= pl[0].round(2) %></li>
+<li>User: <%= User.find(pl[1]).username %> | Portfolio Name: <%= Portfolio.find(pl[2]).portfolio_name %> | P&L Ratio: <%= pl[0].round(2) %> </li>
 <% end %>
 </div>
 <h5 id='w4'><%= button_to "View All Portfolios", portfolios_path, method: :get %></h5>
@@ -10,7 +10,7 @@
 <h3 id='w2'> TOP 5 USERS</h3>
 <h5 id='w3'>Average P&L Ratio of ALL Portfolios for Each User</h5>
 <div id='welcome'>
-<% @users_ports_sorted.uniq.each do |pl|  %> 
+<% @users_ports_sorted.each do |pl|  %> 
 <li>User: <%= User.find(pl[1]).username %> | P&L Ratio: <%= pl[0].round(2) %></li>
 <% end %>
 </div>

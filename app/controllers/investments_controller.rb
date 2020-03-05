@@ -4,7 +4,7 @@ class InvestmentsController < ApplicationController
         @portfolio = Portfolio.find(params[:portfolio_id])
         @investment = Investment.new
 
-        if current_user.id == @portfolio.user_id
+        if current_user && current_user.id == @portfolio.user_id
         else
             redirect_to @portfolio
         end
@@ -13,17 +13,22 @@ class InvestmentsController < ApplicationController
     def create
         current_price = MyHelper.get_current_stock_price(investment_params[:symbol])
         @portfolio = Portfolio.find(params[:portfolio_id])
-        @portfolio.validate_buy(investment_params[:symbol], investment_params[:num_shares])
-        @investment = Investment.new(investment_params)
-        @investment.update(purchase_price: current_price,current_price: current_price, purchase_date: MyHelper.current_date_to_YYYYMMDD, portfolio_id: params[:portfolio_id])
-        @portfolio.update(current_cash: @portfolio.current_cash - (investment_params[:num_shares].to_f*current_price))
-        redirect_to @portfolio
+        if current_price != false
+            @portfolio.validate_buy(investment_params[:symbol], investment_params[:num_shares])
+            @investment = Investment.new(investment_params)
+            @investment.update(purchase_price: current_price,current_price: current_price, purchase_date: MyHelper.current_date_to_YYYYMMDD, portfolio_id: params[:portfolio_id])
+            @portfolio.update(current_cash: @portfolio.current_cash - (investment_params[:num_shares].to_f*current_price))
+            redirect_to @portfolio
+        else
+            flash[:error] = "Sorry, that is not a valid stock ticker symbol."
+            redirect_to @portfolio
+        end
     end
 
     def edit
         @investment = Investment.find(params[:id])
         @portfolio = Portfolio.find(params[:portfolio_id])
-        if current_user.id == @investment.user.id 
+        if current_user && current_user.id == @investment.user.id 
 
         else
             redirect_to @portfolio
