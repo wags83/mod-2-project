@@ -19,7 +19,12 @@ class CommentsController < ApplicationController
   end
 
   def edit
-      @comment = Comment.find(params[:id])
+        @comment = Comment.find(params[:id])
+      if current_user && current_user.id == comment.user_id
+        @comment = Comment.find(params[:id])
+      else
+        redirect_to portfolio_path(@comment.portfolio_id)
+      end
   end
 
   def update

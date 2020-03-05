@@ -8,7 +8,6 @@
     <th>Owner</th>
     <th>Initial Cash</th>
     <th>Current Cash</th>
-    <th>User ID</th>
     <th>Value</th>
     <th>P&L</th>
     <th>P&L %</th>
@@ -16,12 +15,11 @@
     <tr>
         <td><%= link_to p.portfolio_name, p %></td>
         <td><%= link_to @users.find_by(id: p.user_id).username, user_path(p.user_id) %></td>
-        <td><%= p.initial_cash.round(0) %></td>
-        <td><%= p.current_cash.round(0) %></td>
-        <td><%= p.user_id %></td>
-        <td><%= p.portfolio_value.round(2) %></td>
-        <td><%= p.portfolio_pl.round(2) %></td>
-        <td><%= p.portfolio_pl_ratio.round(2) %></td>
+        <td><%= number_to_currency(p.initial_cash.round(2)) %></td>
+        <td><%= number_to_currency(p.current_cash.round(2)) %></td>
+        <td><%= number_to_currency(p.portfolio_value.round(2)) %></td>
+        <td><%= number_to_currency(p.portfolio_pl.round(2))%></td>
+        <td><%= "#{p.portfolio_pl_ratio.round(2)} %" %></td>
         </tr>
   <table class="table table-dark table-sm">
   <tr>
@@ -38,13 +36,13 @@
     <% p.investments.each do |i| %>
     <tr>
         <td><%= i.symbol %></td>
-        <td><%= i.purchase_price.round(2) %></td>
-        <td><%= i.current_price.round(2) %></td>
+        <td><%= number_to_currency(i.purchase_price.round(2)) %></td>
+        <td><%= number_to_currency(i.current_price.round(2))%></td>
         <td><%= i.purchase_date %></td>
         <td><%= i.num_shares %></td>
-        <td><%= i.investment_value.round(2) %></td>
-        <td><%= i.investment_pl.round(2) %></td>
-        <td><%= i.investment_pl_ratio.round(2) %></td>
+        <td><%= number_to_currency(i.investment_value.round(2)) %></td>
+        <td><%= number_to_currency(i.investment_pl.round(2)) %></td>
+        <td><%= "#{i.investment_pl_ratio.round(2)} #" %></td>
  
 
     </tr>

@@ -14,14 +14,6 @@
  *= require_self
  */
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
 #top5 {
     align-items: center;
     height: 200px;
@@ -30,7 +22,6 @@
     width:2500px;
     border-style: solid;
     border-width: 2px;
-
 
   }
 
@@ -111,6 +102,7 @@ div.container2{
     background-color: #3e4f72;
     text-align: center;
     width:100vw;
+    margin-top: 1%;
   }
 
   #w4 {
@@ -119,7 +111,6 @@ div.container2{
     width:100vw;
     margin: 2px;
   }
-=======
  body {
      background-color: lightgray;
      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -162,4 +153,3 @@ div.container2{
  h2 {
     margin: 1%
  }
->>>>>>> 4f0f6d9e445e4e70a428f774e4fbaa4e5105796f
