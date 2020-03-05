@@ -13,6 +13,12 @@ class PortfoliosController < ApplicationController
 
     def new
         @portfolio = Portfolio.new
+        if current_user && current_user.id == @portfolio.user_id
+
+        else
+            redirect_to @portfolio 
+        end
+
     end
 
     def create

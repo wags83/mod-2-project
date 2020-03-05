@@ -4,7 +4,7 @@ class InvestmentsController < ApplicationController
         @portfolio = Portfolio.find(params[:portfolio_id])
         @investment = Investment.new
 
-        if current_user.id == @portfolio.user_id
+        if current_user && current_user.id == @portfolio.user_id
         else
             redirect_to @portfolio
         end
@@ -23,7 +23,7 @@ class InvestmentsController < ApplicationController
     def edit
         @investment = Investment.find(params[:id])
         @portfolio = Portfolio.find(params[:portfolio_id])
-        if current_user.id == @investment.user.id 
+        if current_user && current_user.id == @investment.user.id 
 
         else
             redirect_to @portfolio
