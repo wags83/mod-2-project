@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
     def welcome
         portfolios = Portfolio.all 
-        pl_array = portfolios.map {|p| [p.portfolio_pl_ratio, p.user_id]}
+        pl_array = portfolios.map {|p| [p.portfolio_pl_ratio, p.user_id, p.id]}
         @sorted = pl_array.sort{|b,a| a[0] <=> b[0]}.slice(0,5)
 
         users = User.all
