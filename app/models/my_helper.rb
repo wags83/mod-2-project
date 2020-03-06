@@ -69,4 +69,5 @@ class MyHelper
         my_response = JSON.parse(response)
     end
 
+    
 end

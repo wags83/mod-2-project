@@ -53,10 +53,10 @@
 <% @user.comments.each do |comment| %>
     <div class="comment">
         <p class="comment_title">
-            Title: <%= comment.title %><br>
-            Content: <%= comment.content %><br>
+            <%= comment.title %><br>        
         </p>
         <p class="comment_paragraph">
+            <%= comment.content %><br>
             Portfolio: <%= link_to Portfolio.all.find(comment.portfolio_id).portfolio_name, Portfolio.all.find(comment.portfolio_id) %><br>
         </p>
         <% if current_user && current_user.id == comment.user_id %>
