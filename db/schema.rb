@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_02_222903) do
+ActiveRecord::Schema.define(version: 2020_03_06_150451) do
 
   create_table "comments", force: :cascade do |t|
     t.string "title"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 2020_03_02_222903) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "records", force: :cascade do |t|
+    t.integer "portfolio_id", null: false
+    t.string "symbol"
+    t.float "purchase_price"
+    t.float "sell_price"
+    t.string "sell_date"
+    t.integer "num_shares"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id"], name: "index_records_on_portfolio_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -59,4 +71,5 @@ ActiveRecord::Schema.define(version: 2020_03_02_222903) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "records", "portfolios"
 end

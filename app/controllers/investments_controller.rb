@@ -44,12 +44,14 @@ class InvestmentsController < ApplicationController
         current_price = MyHelper.get_current_stock_price(@investment.symbol)
         @portfolio = Portfolio.find(params[:portfolio_id])
         if investment_params[:num_shares].to_i < @investment.num_shares 
+            record = Record.create(portfolio_id: @investment.portfolio_id, symbol: @investment.symbol, purchase_price: @investment.purchase_price, sell_price: current_price, sell_date: MyHelper.current_date_to_YYYYMMDD, num_shares: @investment.num_shares)
             new_shares = @investment.num_shares - investment_params[num_shares]
             @investment.update(num_shares: new_shares)
             new_balance = @portfolio.current_cash + (investment_params[:num_shares].to_f * current_price)
             @portfolio.update(current_cash: new_balance)
             redirect_to @portfolio
         elsif investment_params[:num_shares].to_i == @investment.num_shares
+            record = Record.create(portfolio_id: @investment.portfolio_id, symbol: @investment.symbol, purchase_price: @investment.purchase_price, sell_price: current_price, sell_date: MyHelper.current_date_to_YYYYMMDD, num_shares: @investment.num_shares)
             @investment.destroy 
             new_balance = (@portfolio.current_cash + (investment_params[:num_shares].to_f * current_price))
             @portfolio.update(current_cash: new_balance)
@@ -64,7 +66,6 @@ class InvestmentsController < ApplicationController
     def destroy
         @investment = Investment.find(params[:id])
         @investment.destroy
-    
         redirect_to investments_path
     end
 
