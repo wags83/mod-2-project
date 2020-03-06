@@ -67,3 +67,5 @@ gem 'dotenv'
 gem 'awesome_print'
 # gem 'yarn'
 gem 'faker'
+gem 'googlecharts'
+gem "google_visualr", ">= 2.5"

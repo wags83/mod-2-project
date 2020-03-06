@@ -9,8 +9,12 @@
 </table>
 
 <% else %>
-<p>Sorry, that is not a valid stock ticker symbol, please try again.</p>
+<p style="margin: 1%">Sorry, that is not a valid stock ticker symbol, please try again.</p>
 <% end %>
+
+<div id='chart'>
+<%= render_chart(@chart, 'chart') if !!@chart == true %>
+</div>
 
 <h2>Company News:</h2>
 <% @top_5_hash.each do |article| %>
