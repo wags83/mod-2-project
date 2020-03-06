@@ -16,4 +16,4 @@
 <% end %>
 </div>
 <h5 id='w4'><%= button_to "View All Users", users_path, method: :get %></h5><br>
-<h5 id='w4'><%= button_to "Create New Account", new_user_path, method: :get %></h5>
+<h5 id='w4'><%= button_to "Create New Account", new_user_path, method: :get if !current_user %></h5>

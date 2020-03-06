@@ -1,4 +1,3 @@
-require 'googlecharts'
 
 class MyHelper
 
