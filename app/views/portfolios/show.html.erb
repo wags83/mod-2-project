@@ -50,7 +50,36 @@
     </tr></table>
     <br>
 
-<h2>Comments:<br></h2>
+
+<h2>Investment Record Log</h2>
+      <table class="table table-light table-sm">
+  <tr>
+    <th>Symbol</th>
+    <th>Purchase Price</th>
+    <th>Sell Price</th>
+    <th>Sell Date</th>
+    <th>Number of Shares</th>
+    <th>Value</th>
+    <th>P&L</th>
+    <th>P&L %</th>
+  </tr>
+
+    <% @portfolio.records.each do |i| %>
+  <tr>
+    <td><%= i.symbol %></td>
+    <td><%= number_to_currency(i.purchase_price) %></td>
+    <td><%= number_to_currency(i.sell_price) %></td>
+    <td><%= i.sell_date %></td>
+    <td><%= i.num_shares %></td>
+    <td><%= number_to_currency(i.investment_value.round(0)) %></td>
+    <td><%= number_to_currency(i.investment_pl.round(0)) %></td>
+    <td><%= "#{i.investment_pl_ratio.round(0)} %" %></td>
+  </tr>
+    <% end%><br>
+    </table>
+
+
+    <h2>Comments:<br></h2>
     <% @portfolio.comments.each do |comment|%>
     <div class="comment">
         <p class="comment_title">
@@ -92,3 +121,4 @@
 <% else %>
   You must be logged in to leave a comment.
 <% end %>
+

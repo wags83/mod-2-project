@@ -1,6 +1,7 @@
 class Portfolio < ApplicationRecord
 
     has_many :investments, dependent: :destroy
+    has_many :records, dependent: :destroy
     belongs_to :user
     has_many :comments, dependent: :destroy
 
