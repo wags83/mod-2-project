@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Produced Paper trading application that allows users to view stock information in real time, research stocks and news, and “buy / sell” to their portfolios.  Built in Rails and utilized Bcrypt for authentication.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Demo: https://www.youtube.com/watch?v=kNoKoxNNn_U
